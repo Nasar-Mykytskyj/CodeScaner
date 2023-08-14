@@ -1,9 +1,9 @@
 # CodeScaner
 
-##What it does
+## What it does
 I have implemented small console application for scanning source code and finding vulnarebilities
 
-##Build and Run
+## Build and Run
 
 **Command-line Git** Clone Code Scanner
 ```
