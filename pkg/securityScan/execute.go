@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 func RunVulnerabilityScan(conf flags.ConfFlags) {
@@ -33,7 +34,7 @@ func RunVulnerabilityScan(conf flags.ConfFlags) {
 
 	go ReadWriteResults(resultChan, conf.OutputPath, conf.OutputFormat)
 
-	workerPool := NewWorkerPool(10, scanChan, resultChan)
+	workerPool := NewWorkerPool(runtime.GOMAXPROCS(0), scanChan, resultChan)
 	go workerPool.Run(context.TODO())
 
 	for _, path := range files {

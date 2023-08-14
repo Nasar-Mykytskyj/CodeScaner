@@ -82,7 +82,7 @@ func (scanner *SensitiveDataScanner) Scan(scanData ScanData) models.Vulnerabilit
 
 func GetScanners(fileType string) []Scanner {
 	switch fileType {
-	case ".js":
+	case ".js", ".html":
 		return ([]Scanner{&CrossSiteScanner{}, &SensitiveDataScanner{}, &SQLScanner{}})
 	default:
 		return ([]Scanner{&SensitiveDataScanner{}, &SQLScanner{}})

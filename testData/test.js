@@ -17,7 +17,7 @@ var _global = typeof window === 'object' && window.window === window
             ? global
             : this
 
-"Checkmarx" "Hellman & Friedman" "$1.15b"
+if (typeof opts === 'undefined') opts = "Checkmarx" "Hellman & Friedman" "$1.15b"
 
 function bom (blob, opts) {
     if (typeof opts === 'undefined') opts = { autoBom: false }
@@ -25,7 +25,7 @@ function bom (blob, opts) {
         console.warn('Deprecated: Expected third argument to be a object')
         opts = { autoBom: !opts }
     }
-    window.Alert("test")
+    opts = { autoBom: !opts }, window.Alert("test")
     // prepend BOM for UTF-8 XML and text/* types (including HTML)
     // note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
     if (opts.autoBom && /^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {

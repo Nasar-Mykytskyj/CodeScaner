@@ -1,10 +1,12 @@
 package helper
 
 import (
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 //Check if directory exist or is not empty
@@ -47,4 +49,18 @@ func GetAllFilesInDirectory(path string) ([]string, error) {
 	})
 
 	return files, err
+}
+
+func PrintMemUsage() {
+	var m runtime.MemStats
+	runtime.ReadMemStats(&m)
+	// For info on each, see: https://golang.org/pkg/runtime/#MemStats
+	fmt.Printf("Alloc = %v MiB", ByteToMb(m.Alloc))
+	fmt.Printf("\tTotalAlloc = %v MiB", ByteToMb(m.TotalAlloc))
+	fmt.Printf("\tSys = %v MiB", ByteToMb(m.Sys))
+	fmt.Printf("\tNumGC = %v\n", m.NumGC)
+}
+
+func ByteToMb(b uint64) uint64 {
+	return b / 1024 / 1024
 }
