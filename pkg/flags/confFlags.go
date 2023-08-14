@@ -48,12 +48,12 @@ func ParseAndValidateFlag() error {
 }
 
 func (out OutputFormat) String() string {
-	return []string{0: "text", 1: "json"}[out]
+	return []string{0: "txt", 1: "json"}[out]
 }
 
 func (out *OutputFormat) Set(val string) error {
 	switch val {
-	case "text":
+	case "txt":
 		*out = TextFormat
 	case "json":
 		*out = JSONFormat
