@@ -24,7 +24,7 @@ var confFlags ConfFlags
 
 func init() {
 	flag.StringVar(&confFlags.SrcPath, "src", "", "Path to source code directory")
-	flag.StringVar(&confFlags.OutputPath, "out", "", "Path for output")
+	flag.StringVar(&confFlags.OutputPath, "out", "result.jsonl", "Path for output")
 	flag.Var(&confFlags.OutputFormat, "format", "Format of report (text or json)")
 }
 

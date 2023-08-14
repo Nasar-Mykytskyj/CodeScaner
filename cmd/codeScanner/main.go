@@ -2,9 +2,8 @@ package main
 
 import (
 	"code_scanner/pkg/flags"
-	"code_scanner/pkg/helper"
 	"code_scanner/pkg/logger"
-	"fmt"
+	"code_scanner/pkg/securityScan"
 	"os"
 )
 
@@ -18,5 +17,5 @@ func main() {
 
 	confFlags := flags.GetConfFlags()
 
-	fmt.Println(helper.GetAllFilesInDirectory(confFlags.SrcPath))
+	securityScan.RunVulnerabilityScan(confFlags)
 }
