@@ -1,4 +1,4 @@
-package securityScan
+package security_scan
 
 import (
 	"bufio"
@@ -6,7 +6,7 @@ import (
 	"code_scanner/internal/logger"
 	"code_scanner/pkg/flags"
 	"code_scanner/pkg/models"
-	"code_scanner/pkg/vulnarebilityWriter"
+	"code_scanner/pkg/writers"
 	"context"
 	"fmt"
 	"os"
@@ -83,7 +83,7 @@ func ReadWriteResults(resultChan chan models.Vulnerability, path string, format 
 
 	defer file.Close()
 
-	writer := vulnarebilityWriter.GetVulnarebilityWriter(format, file)
+	writer := writers.GetVulnarebilityWriter(format, file)
 
 	for res := range resultChan {
 		if err := writer.Write(res); err != nil {

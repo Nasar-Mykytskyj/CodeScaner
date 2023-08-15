@@ -1,4 +1,4 @@
-package vulnarebilityWriter
+package writers
 
 import (
 	"bufio"

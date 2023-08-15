@@ -1,4 +1,4 @@
-package securityScan
+package security_scan
 
 import (
 	"code_scanner/pkg/models"
@@ -6,21 +6,6 @@ import (
 	"reflect"
 	"sync"
 )
-
-func worker(wg *sync.WaitGroup, scanDataChan <-chan ScanData, results chan<- models.Vulnerability) {
-	defer wg.Done()
-	for scanData := range scanDataChan {
-		scanners := GetScanners(scanData.FileType)
-
-		for _, scanner := range scanners {
-			res := scanner.Scan(scanData)
-
-			if !reflect.DeepEqual(models.Vulnerability{}, res) {
-				results <- scanner.Scan(scanData)
-			}
-		}
-	}
-}
 
 type WorkerPool struct {
 	workersNumber int
@@ -35,6 +20,21 @@ func NewWorkerPool(number int, scanDataChan chan ScanData, resultsChan chan mode
 		scanDataChan:  scanDataChan,
 		results:       resultsChan,
 		Done:          make(chan struct{}),
+	}
+}
+
+func worker(wg *sync.WaitGroup, scanDataChan <-chan ScanData, results chan<- models.Vulnerability) {
+	defer wg.Done()
+	for scanData := range scanDataChan {
+		scanners := GetScanners(scanData.FileType)
+
+		for _, scanner := range scanners {
+			res := scanner.Scan(scanData)
+
+			if !reflect.DeepEqual(models.Vulnerability{}, res) {
+				results <- scanner.Scan(scanData)
+			}
+		}
 	}
 }
 

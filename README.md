@@ -14,7 +14,7 @@ $ git clone https://github.com/Nasar-Mykytskyj/CodeScaner.git
 For building application ensure that GOPATH includes the repo then type in command line 
 ```
 $ cd CodeScanner
-$ go build -o <buildPath> code_scanner/cmd/codeScanner
+$ go build -o <buildPath> code_scanner/cmd/code_scanner
 ```
 To application type in command line 
 ```

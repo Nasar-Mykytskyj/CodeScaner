@@ -1,4 +1,4 @@
-package securityScan
+package security_scan
 
 import (
 	"code_scanner/pkg/models"
