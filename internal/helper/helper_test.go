@@ -11,7 +11,7 @@ func TestIsFilePathValid(t *testing.T) {
 		name   string
 	}{
 		{
-			path:   "./testData",
+			path:   "./test",
 			result: true,
 			name:   "IsFilePathValidPositive",
 		},

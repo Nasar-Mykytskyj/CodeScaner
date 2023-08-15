@@ -2,9 +2,9 @@ package securityScan
 
 import (
 	"bufio"
+	"code_scanner/internal/helper"
+	"code_scanner/internal/logger"
 	"code_scanner/pkg/flags"
-	"code_scanner/pkg/helper"
-	"code_scanner/pkg/logger"
 	"code_scanner/pkg/models"
 	"code_scanner/pkg/vulnarebilityWriter"
 	"context"
@@ -77,7 +77,7 @@ func ReadFileLineByLine(path string, scanChan chan ScanData) {
 func ReadWriteResults(resultChan chan models.Vulnerability, path string, format flags.OutputFormat) {
 	file, err := os.Create(path)
 	if err != nil {
-		fmt.Printf("Error creating results file: %v\n", err)
+		logger.GetGeneralLogger().Printf("Error creating results file: %v\n", err)
 		return
 	}
 
@@ -86,6 +86,8 @@ func ReadWriteResults(resultChan chan models.Vulnerability, path string, format 
 	writer := vulnarebilityWriter.GetVulnarebilityWriter(format, file)
 
 	for res := range resultChan {
-		writer.Write(res)
+		if err := writer.Write(res); err != nil {
+			logger.GetGeneralLogger().Printf("Error during writing to result file err: %v", err)
+		}
 	}
 }

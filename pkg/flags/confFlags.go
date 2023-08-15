@@ -1,7 +1,7 @@
 package flags
 
 import (
-	"code_scanner/pkg/helper"
+	"code_scanner/internal/helper"
 	"errors"
 	"flag"
 	"fmt"

@@ -1,8 +1,8 @@
 package main
 
 import (
+	"code_scanner/internal/logger"
 	"code_scanner/pkg/flags"
-	"code_scanner/pkg/logger"
 	"code_scanner/pkg/securityScan"
 	"os"
 )

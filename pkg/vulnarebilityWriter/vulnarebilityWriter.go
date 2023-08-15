@@ -23,7 +23,7 @@ type TextVulnarebilityWriter struct {
 
 func (jvw *JsonVulnarebilityWriter) Write(vulnarebility models.Vulnerability) error {
 	if jvw.encoder == nil {
-		errors.New("Error JsonVulnarebilityWriter encoder field is null")
+		return errors.New("Error JsonVulnarebilityWriter encoder field is null")
 	}
 
 	return jvw.encoder.Encode(&vulnarebility)
@@ -31,7 +31,7 @@ func (jvw *JsonVulnarebilityWriter) Write(vulnarebility models.Vulnerability) er
 
 func (tvw *TextVulnarebilityWriter) Write(vulnarebility models.Vulnerability) error {
 	if tvw.writer == nil {
-		errors.New("Error TextVulnarebilityWriter writer field is null")
+		return errors.New("Error TextVulnarebilityWriter writer field is null")
 	}
 	_, err := tvw.writer.WriteString(vulnarebility.String() + "\n")
 	if err != nil {
