@@ -23,7 +23,7 @@ func NewWorkerPool(number int, scanDataChan chan ScanData, resultsChan chan mode
 	}
 }
 
-func worker(wg *sync.WaitGroup, scanDataChan <-chan ScanData, results chan<- models.Vulnerability) {
+func Worker(wg *sync.WaitGroup, scanDataChan <-chan ScanData, results chan<- models.Vulnerability) {
 	defer wg.Done()
 	for scanData := range scanDataChan {
 		scanners := GetScanners(scanData.FileType)
@@ -43,7 +43,7 @@ func (wp WorkerPool) Run(ctx context.Context) {
 
 	for i := 0; i < wp.workersNumber; i++ {
 		wg.Add(1)
-		go worker(&wg, wp.scanDataChan, wp.results)
+		go Worker(&wg, wp.scanDataChan, wp.results)
 	}
 
 	wg.Wait()
